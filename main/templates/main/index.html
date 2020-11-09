@@ -1,0 +1,102 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block title %}Резюме{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top:30px">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="img">
+                    <img src="{% static 'media/AlexT.jpg' %}" alt="Photo AlexT.jpg" width="100%">
+                </div>
+                <hr class="d-sm-none">
+            </div>
+            <div class="col-sm-8">
+                <h2>КОНТАКТНЫЕ ДАННЫЕ</h2><br>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Мобильный&nbsp;телефон:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            +7(926)1411865
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Электронная&nbsp;почта:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            tanaev@bk.ru
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Возраст:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            41 год (28.12.1978)
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Проживание:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            Москва (метро Отрадное)
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Ключевые навыки:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            Python, Linux, Git, PosgreSQL, Django, ООП
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Гражданство:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            Россия
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm">
+                            <b>Семейное&nbsp;положение:</b>
+                        </div>
+                        <div class="col-sm colortext">
+                            Женат, дети (двое)
+                        </div>
+                        <div class="col-sm"></div>
+                    </div>
+                    <br>
+                </div>
+                <br>
+                <h2>ОПЫТ РАБОТЫ</h2><br>
+                <h5>Военная служба в Вооружённых Силах РФ, 1999 - 2007</h5>
+                <p><ins>Должность:</ins> техник-оператор</p>
+                <p><ins>Обязанности:</ins> выполнение видеосъемки, монтаж видеоматериала, компьютерная графика. Написание сценариев для репортажей.</p>
+                <h5>Работа в различных мелких компаниях и на фрилансе, 2007 - 20016</h5>
+                <p><ins>Обязанности:</ins> Компьютерная графика, монтаж видео, фотография, менеджмент, составление и подписание договоров с клиентами.</p>
+                <h5>Гражданская служба в Главном Вычислительном Центре Вооружённых Силах РФ, 2016 - настоящее время</h5>
+                <p><ins>Должность:</ins> инженер-программист</p>
+                <p><ins>Обязанности:</ins> написание скриптов, GUI, программ на языка Python, знание алгоритмов и паттернов проектирования. PostgreSQL, SQLite.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

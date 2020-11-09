@@ -1,0 +1,21 @@
+{% extends 'blog.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Вход - Блог писателей{% endblock %}
+
+
+{% block include_content %}
+<div class="shadow w-100 p-5" align="center">
+    <h2>Вход</h2><br>
+    {% if user.is_authenticated %}
+        <p>Вы уже выполнили вход</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form layout="horizontal" %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {% buttons submit="Войти" %}{% endbuttons %}
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
