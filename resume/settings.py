@@ -131,3 +131,15 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = join(BASE_DIR, "media")
 
 LOGIN_REDIRECT_URL = "blog:profile"
+
+# easy_thumbnails app settings
+# [rus] настройки приложения easy_thumbnails
+THUMBNAIL_ALIASES = {
+    "": {
+        'default': {
+            "size": (96, 96,),
+            "crop": "scale",
+        },
+    },
+}
+THUMBNAIL_BASEDIR = "thumbnails"

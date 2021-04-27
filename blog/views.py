@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,6 +7,9 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+
+from .models import Story
+from .forms import StoryForm
 
 
 #  blog home page
@@ -47,3 +50,36 @@ class RegisterUserView(CreateView):
 # [rus] выводит сообщение об удачной регистрации
 class RegisterDoneView(TemplateView):
     template_name = "register_done.html"
+
+# Adding a new story
+# [rus] Добавление нового рассказа
+# @login_required
+def add_story(request):
+    if request.method == "POST":
+        form = StoryForm(request.POST, request.FILES)  # the form accepts post and files requests
+        if form.is_valid():
+            s = form.save(commit=False)  # saving a form
+            s.stories = request.user # adding the "stories" field to the form
+            s.save()  # saving a record to a database
+            return redirect("blog:blog")
+        else:
+            form = StoryForm()  # empty form
+    else:
+        form = StoryForm()  # empty form
+    return render(request, "story_add.html", {"form": form})
+
+
+# def add_story(request):
+#     if request.method == "POST":
+#         form = StoryForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             print("+++")
+#             # form.save()
+#         else:
+#             print("НЕВАЛИДНО")
+#             print(form.errors)
+#             print(form.cleaned_data)
+#     else:
+#         form = StoryForm()
+#     context = {"form": form}
+#     return render(request, "story_add.html", context)

@@ -24,5 +24,4 @@ def thousand_characters(file):
 # [rus] возвращает имя файла в формате: "время.расширение_файла" (7672886.txt)
 # для модели Story
 def get_timestamp_path(instance, filename):
-    return "stories/%Y/%m/%d/" + "%s%s" % (int(datetime.now().timestamp()),
-                                           splitext(filename)[1])
+    return "stories/" + "%s%s" % (int(datetime.now().timestamp()), splitext(filename)[1])

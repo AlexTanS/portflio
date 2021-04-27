@@ -1,0 +1,17 @@
+{% extends "blog.html" %}
+{% load bootstrap4 %}
+
+{% block namepage %}Добавление рассказа{% endblock %}
+
+{% block include_content %}
+<div class="shadow w-100 p-5" align="center">
+    <h2>Внесите данные.</h2><br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+        {% buttons submit="Добавить" %}{% endbuttons %}
+    </form>
+</div>
+
+
+{% endblock %}

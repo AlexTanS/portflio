@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from .utilites import get_timestamp_path
 
@@ -31,3 +32,5 @@ class Story(models.Model):
     class Meta:
         verbose_name = "Рассказ"
         verbose_name_plural = "Рассказы"
+
+

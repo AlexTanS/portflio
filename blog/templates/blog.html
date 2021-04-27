@@ -10,6 +10,7 @@
                  {% if user.is_authenticated %}
                     <li class="nav-link"><a href="{% url 'blog:blog' %}">Все рассказы</a></li>
                     <li class="nav-link"><a href="{% url 'blog:profile' %}">Мои рассказы</a></li>
+                    <li class="nav-link"><a href="{% url 'blog:add_story' %}">Добавить новый рассказ</a></li>
                     <li class="nav-link"><a href="{% url 'blog:logout' %}">Выход</a></li>
                 {% else %}
                     <li class="nav-link"><a href="{% url 'blog:login' %}">Вход</a></li>
