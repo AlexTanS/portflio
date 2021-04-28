@@ -15,8 +15,8 @@ from os.path import splitext
 # FIXME !!!!!!!!!!!!!!!!!!!!!!!!! НЕ СОЗДАВАТЬ ОБЪЕКТОВ МОДЕЛИ "Story"
 def thousand_characters(file):
     with open(file, "r", encoding="utf-8") as f:
-        temp = f.read()[:1000]
-    return temp
+        temp = f.read()[:100]
+    return temp + "..."
 
 
 # returns the file name in the format: "time.file_extension" (7672886.txt)

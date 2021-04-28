@@ -1,0 +1,26 @@
+{% extends "blog.html" %}
+{% load bootstrap4 %}
+
+{% block include_content %}
+<div class="container border rounded">
+
+<div class="row">
+    <div class="col">
+        <h2 align="center">
+            {{ story.title_story }}
+        </h2>
+    </div>
+</div>
+    <hr>
+<div class="row">
+    <div class="col">
+{# Описать картинку и рассказ #}
+        <div class="alert visible-xs">
+            <img src="{{ story.image_story.url }}" class="img-fluid">
+        </div>
+        <p class="text-justify">{{ text }}</p>
+    </div>
+</div>
+
+</div>
+{% endblock %}

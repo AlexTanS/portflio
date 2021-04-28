@@ -1,31 +1,80 @@
 {% extends 'layout/base.html' %}
+{% load bootstrap4 %}
+
 
 {% block title %}Блог писателей{% endblock %}
 {% block namepage %}Блог{% endblock %}
+
 {% block content %}
     <br>
     <div class="d-flex flex-row">
-            <!-- Links -->
-            <ul class="shadow">
-                 {% if user.is_authenticated %}
-                    <li class="nav-link"><a href="{% url 'blog:blog' %}">Все рассказы</a></li>
-                    <li class="nav-link"><a href="{% url 'blog:profile' %}">Мои рассказы</a></li>
-                    <li class="nav-link"><a href="{% url 'blog:add_story' %}">Добавить новый рассказ</a></li>
-                    <li class="nav-link"><a href="{% url 'blog:logout' %}">Выход</a></li>
-                {% else %}
-                    <li class="nav-link"><a href="{% url 'blog:login' %}">Вход</a></li>
-                    <li class="nav-link"><a href="{% url 'blog:register' %}">Регистрация</a></li>
-                    <li class="nav-link"><a href="#">Прочее</a></li>
-                {% endif %}
-            </ul>
+        <!-- Links -->
+        <ul class="shadow">
+            {% if user.is_authenticated %}
+                <li class="nav-link"><a href="{% url 'blog:blog' %}">Все рассказы</a></li>
+                <li class="nav-link"><a href="{% url 'blog:profile' %}">Мои рассказы</a></li>
+                <li class="nav-link"><a href="{% url 'blog:add_story' %}">Добавить новый рассказ</a></li>
+                <li class="nav-link"><a href="{% url 'blog:logout' %}">Выход</a></li>
+            {% else %}
+                <li class="nav-link"><a href="{% url 'blog:login' %}">Вход</a></li>
+                <li class="nav-link"><a href="{% url 'blog:register' %}">Регистрация</a></li>
+                <li class="nav-link"><a href="{% url 'blog:blog' %}">Все рассказы</a></li>
+            {% endif %}
+        </ul>
 
-        <!-- FIXME сделать список из рассказов и пагинатор, максимум 10 рассказов -->
-
-        {% block include_content %}
-            <div class="shadow w-100">
-                    <p class="text-center">Описание</p>
+    {% block include_content %}
+        <div class="container border rounded-top">
+            <div class="row">
+                <div class="col-sm">
+                    <h2 align="center">Рассказы</h2>
+                </div>
             </div>
-        {% endblock %}
-
+            <div class="row">
+                <div class="col-sm">
+                    {% for s in stories %}
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img src="{{ s.image_story.url }}" class="img-thumbnail" alt="Иллюстрация к рассказу {{ s.title_story }}">
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        Наименование рассказа: {{ s.title_story }}
+                                    </div>
+                                    <div class="col-sm-4">
+                                        Автор: {{ s.get_author }} {{s.stories }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row p-2">
+                                    {{ s.text_small }} <a href="{% url "blog:page_story" id_story=s.id %}">Читать далее</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                                Страница № {{ page.number }} of {{ page.paginator.num_pages }}.
+                            </span>
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page.next_page_number }}">next</a>
+                                <a href="?page={{ page.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    {% endblock %}
 {% endblock %}

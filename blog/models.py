@@ -29,8 +29,15 @@ class Story(models.Model):
     image_story = models.ImageField(upload_to=get_timestamp_path, blank=True,
                                     verbose_name="Обложка")
 
+    # returns username from User by primary key
+    # [rus] возвращает username из User по первичному ключу
+    def get_author(self, parent_id):
+        return User.objects.get(id=parent_id).username
+
     class Meta:
         verbose_name = "Рассказ"
         verbose_name_plural = "Рассказы"
+
+
 
 

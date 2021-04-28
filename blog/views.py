@@ -7,15 +7,30 @@ from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 from .models import Story
 from .forms import StoryForm
+from .utilites import thousand_characters
 
 
-#  blog home page
-# [rus] главная страница блога
+#  blog home page - all stories with the paginator
+# [rus] главная страница блога - показываются все рассказы с пагинатором
 def blog(request):
-    return render(request, 'blog.html')
+    # users = User.objects.all()  # get users
+    strs = Story.objects.get_queryset().order_by("id")  # get stories
+    paginator = Paginator(strs, 4)  # create paginator
+
+    # Determining the page number for the paginator
+    # [rus] Определение номера страницы для пагинатора
+    if "page" in request.GET:
+        page_number = request.GET["page"]
+    else:
+        page_number = 1
+
+    page = paginator.get_page(page_number)  # get obj Page
+    context = {"page": page, "stories": page.object_list}
+    return render(request, 'blog.html', context)
 
 
 # the page controller 'login'
@@ -53,33 +68,31 @@ class RegisterDoneView(TemplateView):
 
 # Adding a new story
 # [rus] Добавление нового рассказа
-# @login_required
 def add_story(request):
     if request.method == "POST":
         form = StoryForm(request.POST, request.FILES)  # the form accepts post and files requests
         if form.is_valid():
             s = form.save(commit=False)  # saving a form
             s.stories = request.user # adding the "stories" field to the form
-            s.save()  # saving a record to a database
-            return redirect("blog:blog")
+            s.text_small = s.text_file.read().decode("utf-8")[:200] + "..."  # adding the "text_small" field to the form
+            # s.save()  # saving a record to a database
+            return redirect("blog:story_done")  # status=302
         else:
-            form = StoryForm()  # empty form
+            form = StoryForm(request.POST, request.FILES)  # empty form
     else:
         form = StoryForm()  # empty form
-    return render(request, "story_add.html", {"form": form})
+    context = {"form": form}
+    return render(request, "story_add.html", context)
 
+# displays a message about the successful addition of the story
+# [rus] выводит сообщение об успешном добавлении рассказа
+def story_done(request):
+    return render(request, "story_done.html")
 
-# def add_story(request):
-#     if request.method == "POST":
-#         form = StoryForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             print("+++")
-#             # form.save()
-#         else:
-#             print("НЕВАЛИДНО")
-#             print(form.errors)
-#             print(form.cleaned_data)
-#     else:
-#         form = StoryForm()
-#     context = {"form": form}
-#     return render(request, "story_add.html", context)
+# Story Page
+# [rus] Страница рассказа
+def page_story(request, id_story):
+    story = Story.objects.get(id=id_story)
+    text = story.text_file.read().decode("utf-8")
+    context = {"story": story, "text": text}
+    return render(request, "page_story.html", context)
