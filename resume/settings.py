@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "main.apps.MainConfig",
     "blog.apps.BlogConfig",
+    "visitka.apps.VisitkaConfig",
     "bootstrap4",
     "django_cleanup",
     "easy_thumbnails",
@@ -77,16 +78,16 @@ WSGI_APPLICATION = 'resume.wsgi.application'
 # Database PostgreSQL 13
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "resumedb",  # BASE_DIR.parent / "data" / "PG_13_202007201" / "16395",
-        "USER": "postgres",
-        "PASSWORD": "123qwe456",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': "resumedb",  # BASE_DIR.parent / "data" / "PG_13_202007201" / "16395",
+#         "USER": "postgres",
+#         "PASSWORD": "123qwe456",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
