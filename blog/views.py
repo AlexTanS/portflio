@@ -18,7 +18,7 @@ from .utilites import thousand_characters
 # [rus] главная страница блога - показываются все рассказы с пагинатором
 def blog(request):
     # users = User.objects.all()  # get users
-    strs = Story.objects.get_queryset().order_by("id")  # get stories
+    strs = Story.objects.get_queryset().order_by("-id")  # get stories
     paginator = Paginator(strs, 4)  # create paginator
 
     # Determining the page number for the paginator
